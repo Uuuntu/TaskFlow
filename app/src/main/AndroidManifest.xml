@@ -13,7 +13,7 @@
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         tools:targetApi="33">
 
         <activity
@@ -28,7 +28,7 @@
 
         <activity
             android:name=".CreateTaskActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
