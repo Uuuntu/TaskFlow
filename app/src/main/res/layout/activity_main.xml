@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Верхняя панель -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <!-- Шестерёнка -->
         <ImageView
             android:id="@+id/settingsIcon"
             android:layout_width="24dp"
@@ -24,7 +22,6 @@
             android:src="@drawable/baseline_settings_24"
             app:tint="@color/settings_icon" />
 
-        <!-- Фильтр -->
         <ImageView
             android:id="@+id/filterIcon"
             android:layout_width="24dp"
@@ -32,14 +29,12 @@
             android:src="@drawable/baseline_filter_alt_24"
             app:tint="@color/filter_icon" />
 
-        <!-- Малый круг -->
         <View
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@drawable/circle_purple"
             android:layout_marginStart="8dp"/>
 
-        <!-- Название приложения -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,7 +44,6 @@
             android:layout_marginStart="10dp"
             android:textSize="16sp"/>
 
-        <!-- Большой круг -->
         <View
             android:layout_width="39dp"
             android:layout_height="39dp"
@@ -75,8 +69,6 @@
         android:layout_alignParentBottom="true"
         android:background="@color/button_dark"/>
 
-
-    <!-- Кнопка добавления -->
     <Button
         android:id="@+id/addButton"
         android:layout_width="match_parent"

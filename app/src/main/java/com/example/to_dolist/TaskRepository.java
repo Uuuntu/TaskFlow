@@ -16,7 +16,6 @@ public class TaskRepository {
         dbHelper = new TaskDbHelper(context);
     }
 
-    // Добавить задачу
     public long addTask(Task task) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -28,7 +27,6 @@ public class TaskRepository {
         return id;
     }
 
-    // Получить все задачи
     public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -47,14 +45,12 @@ public class TaskRepository {
         return tasks;
     }
 
-    // Удалить задачу по id
     public void deleteTask(long id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TaskDbHelper.TABLE_NAME, TaskDbHelper.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
         db.close();
     }
 
-    // Обновить задачу
     public void updateTask(Task task) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

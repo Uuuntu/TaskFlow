@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-
-        // Инициализация RecyclerView
         RecyclerView recyclerView = findViewById(R.id.tasksRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -78,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Восстановление состояния
         if (savedInstanceState != null) {
             isFirstLaunch = savedInstanceState.getBoolean("isFirstLaunch", true);
             List<Task> savedTasks = (List<Task>) savedInstanceState.getSerializable("tasks");
@@ -87,13 +84,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Добавление примера задачи
         if (adapter.getItemCount() == 0 && isFirstLaunch) {
             addExampleTask();
             isFirstLaunch = false;
         }
 
-        // Обработчики кликов
         findViewById(R.id.addButton).setOnClickListener(v ->
                 startActivityForResult(
                         new Intent(this, CreateTaskActivity.class),
@@ -114,25 +109,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showEditTaskDialog(Task task, int position) {
-        // Создаём контейнер для полей ввода
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         int padding = (int) (16 * getResources().getDisplayMetrics().density);
         layout.setPadding(padding, padding, padding, padding);
 
-        // Поле для названия
         final EditText editTitle = new EditText(this);
         editTitle.setHint("Название задачи");
         editTitle.setText(task.getTitle());
         layout.addView(editTitle);
 
-        // Поле для описания
         final EditText editDescription = new EditText(this);
         editDescription.setHint("Описание задачи");
         editDescription.setText(task.getDescription());
         layout.addView(editDescription);
 
-        // Создаём диалог
         new AlertDialog.Builder(this)
                 .setTitle("Редактировать задачу")
                 .setView(layout)
@@ -174,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                 Task newTask = (Task) data.getSerializableExtra("task");
                 if (newTask != null) {
                     adapter.addTask(newTask);
-                    // Если есть пример задачи — удалить её
                     adapter.removeExampleTask();
                 }
             }
@@ -210,13 +200,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // Настройка Spinner
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
                 this, R.array.sort_options, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(spinnerAdapter);
 
-        // Устанавливаем текущие значения
         sortSpinner.setSelection(currentSortType);
         rangeSlider.setValues((float) currentMin, (float) currentMax);
         tvMin.setText("Мин: " + currentMin + "%");

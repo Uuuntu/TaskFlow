@@ -16,8 +16,6 @@ public class Task implements Serializable {
     private long id;
     private boolean isExample = false;
 
-    // Геттеры и сеттеры
-
     public String getTitle() {
         return title;
     }
@@ -39,12 +37,7 @@ public class Task implements Serializable {
     public int getProgress() { return progress; }
     public void setProgress(int progress) { this.progress = progress; }
 
-    /*public int[] getGradientColors() {
-        if (gradientColors == null || gradientColors.length != 2) {
-            return new int[]{Color.LTGRAY, Color.WHITE}; // Возвращаем градиент по умолчанию
-        }
-        return gradientColors.clone();
-    }*/
+
     public int[] getGradientColors() {
         if (gradientColors == null || gradientColors.length != 2) {
             return new int[]{Color.RED, Color.GREEN}; // дефолт

@@ -38,27 +38,24 @@ public class CreateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
-        // Инициализация всех view ОДИН РАЗ в начале
+
         initViews();
         isEdit = getIntent().getBooleanExtra("isEdit", false);
 
-        // Проверяем, открыты ли мы для редактирования
         if (getIntent().hasExtra("edit_task")) {
             isEditMode = true;
             editPosition = getIntent().getIntExtra("edit_position", -1);
             Task task = (Task) getIntent().getSerializableExtra("edit_task");
 
             if (task != null) {
-                newTask = task; // Используем переданную задачу для редактирования
+                newTask = task;
                 selectedColors = task.getGradientColors();
 
-                // Заполняем поля данными задачи
                 etTitle.setText(task.getTitle() != null ? task.getTitle() : "");
                 etDescription.setText(task.getDescription() != null ? task.getDescription() : "");
                 btnProgress.setText(task.getProgress() + "%");
                 btnPriority.setText(String.valueOf(task.getPriority()));
 
-                // Устанавливаем дедлайн если он есть
                 if (task.getDeadline() != null) {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(task.getDeadline());
@@ -68,11 +65,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                             cal.get(Calendar.YEAR)));
                 }
 
-                // Меняем текст кнопки сохранения
                 btnSave.setText("Сохранить изменения");
 
-                // Устанавливаем градиент
-                //updateGradientPreview();
             }
         }
 
@@ -81,7 +75,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         setupClickListeners();
-        //updateButtonGradient(null);
     }
 
     private void initViews() {
@@ -111,18 +104,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         outState.putIntArray(KEY_COLORS, selectedColors);
     }
 
-    /*private void updateButtonGradient(GradientDrawable oldDrawable) {
-        GradientDrawable newDrawable = createGradientDrawable();
-        if (oldDrawable != null) {
-            TransitionDrawable transition = new TransitionDrawable(new Drawable[]{oldDrawable, newDrawable});
-            btnSave.setBackground(transition);
-            transition.startTransition(300);
-        } else {
-            btnSave.setBackground(newDrawable);
-        }
-        // Установить текст белым
-        btnSave.setTextColor(Color.WHITE);
-    }*/
+
 
     private GradientDrawable createGradientDrawable() {
         GradientDrawable gradient = new GradientDrawable(
@@ -145,11 +127,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         // Порог 180 вместо 128 — чтобы чаще выбирался белый текст
         btnSave.setTextColor(luminance > 180 ? Color.BLACK : Color.WHITE);
     }
-
-    /*private void updateGradientPreview() {
-        GradientDrawable gradient = createGradientDrawable();
-        btnGradient.setBackground(gradient);
-    }*/
 
     private void showPriorityDialog() {
         String[] priorities = new String[10];
@@ -195,25 +172,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                 .setNegativeButton("Отмена", null)
                 .show();
     }
-
-    /*private void showColorDialog() {
-        View dialogView = getLayoutInflater().inflate(R.layout.color_picker_dialog, null);
-        ColorPickerView colorPicker1 = dialogView.findViewById(R.id.colorPicker1);
-        ColorPickerView colorPicker2 = dialogView.findViewById(R.id.colorPicker2);
-        new AlertDialog.Builder(this)
-                .setTitle("Выберите цвета градиента")
-                .setView(dialogView)
-                .setPositiveButton("OK", (dialog, which) -> {
-                    selectedColors[0] = colorPicker1.getColor();
-                    selectedColors[1] = colorPicker2.getColor();
-                    newTask.setGradientColors(selectedColors);
-                    updateGradientPreview();
-                    updateButtonGradient((GradientDrawable) btnSave.getBackground()); // Обновить градиент
-                })
-                .setNegativeButton("Отмена", null)
-                .show();
-    }*/
-
 
     private void saveTask() {
         String title = etTitle.getText().toString().trim();

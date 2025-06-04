@@ -14,8 +14,8 @@
     <color name="purple_700">#4A2EC6</color>
     <color name="shadow">#80000000</color>
     <color name="gray">#808080</color>
-    <color name="button_dark">#8E4FE7</color> <!-- Пример темно-фиолетового -->
-    <color name="divider_color">#E0E0E0</color> <!-- Серый цвет, можно изменить -->
-    <color name="default_gradient_start">#FF0000</color> <!-- Красный -->
-    <color name="default_gradient_end">#00FF00</color>    <!-- Зеленый -->
+    <color name="button_dark">#8E4FE7</color>
+    <color name="divider_color">#E0E0E0</color>
+    <color name="default_gradient_start">#FF0000</color>
+    <color name="default_gradient_end">#00FF00</color>
 </resources>

@@ -49,8 +49,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public void addTask(Task task) {
-        // long id = repository.addTask(task);
-        // task.setId(id);
         tasks.add(task);
         allTasks.add(task);
         filteredTasks.add(task);
@@ -76,9 +74,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public void updateTask(int position, Task updatedTask) {
-        // Обновляем в основном списке
         allTasks.set(position, updatedTask);
-        // Если фильтр активен — применяем фильтр заново
         if (isFilterActive) {
             applyCurrentFilter();
         } else {
@@ -132,10 +128,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         }
 
         switch (sortType) {
-            case 0: // По важности
+            case 0:
                 Collections.sort(filteredTasks, (a, b) -> Integer.compare(b.getPriority(), a.getPriority()));
                 break;
-            case 1: // По дате
+            case 1:
                 Collections.sort(filteredTasks, (a, b) -> {
                     Date d1 = a.getDeadline(), d2 = b.getDeadline();
                     if (d1 == null && d2 == null) return 0;
@@ -144,7 +140,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     return d1.compareTo(d2);
                 });
                 break;
-            case 2: // По порядку добавления
+            case 2:
             default:
                 break;
         }
@@ -158,7 +154,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
 
     public void applyCurrentFilter() {
-        // Например, фильтр по важности (priority >= 8)
         filteredTasks.clear();
         for (Task t : allTasks) {
             if (t.getPriority() >= 8) filteredTasks.add(t);
@@ -192,7 +187,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             holder.taskDescription.setVisibility(View.VISIBLE);
         }
 
-        // 1. Создаём новый GradientDrawable для прогресса
         int[] colors = task.getGradientColors();
         if (colors == null || colors.length != 2) {
             colors = new int[]{Color.RED, Color.GREEN};
@@ -201,26 +195,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 GradientDrawable.Orientation.LEFT_RIGHT, colors);
         progressGradient.setCornerRadius(20f);
 
-        // 2. Оборачиваем в ClipDrawable
         ClipDrawable clip = new ClipDrawable(progressGradient, Gravity.START, ClipDrawable.HORIZONTAL);
 
-        // 3. Создаём LayerDrawable (фон + прогресс)
         Drawable background = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.progress_background);
         LayerDrawable layer = new LayerDrawable(new Drawable[]{background, clip});
         layer.setId(0, android.R.id.background);
         layer.setId(1, android.R.id.progress);
 
-        // 4. Устанавливаем новый Drawable
         holder.progressBar.setProgressDrawable(layer);
 
-        // 5. Сразу после этого устанавливаем прогресс
         holder.progressBar.setProgress(task.getProgress());
 
         holder.tvProgressPercent.setText(task.getProgress() + "%");
         holder.tvProgressPercent.setTextColor(getContrastColor(colors[0]));
 
-        // Если хотите анимацию — делайте её только после установки Drawable и прогресса
-        // (иначе анимация может не работать корректно)
         ObjectAnimator animator = ObjectAnimator.ofInt(holder.progressBar, "progress", task.getProgress());
         animator.setDuration(500);
         animator.start();
