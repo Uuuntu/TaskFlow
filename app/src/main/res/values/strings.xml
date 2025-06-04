@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TaskFlow</string>
+    <string name="add_task">Добавить задачу</string>
+    <string name="task_title_hint">Введите название</string>
+    <string name="task_description_hint">Введите описание</string>
+    <string name="gradient_fixed">Градиент зафиксирован</string>
+</resources>
